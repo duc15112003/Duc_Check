@@ -1,0 +1,65 @@
+.seat-type-info.unavailable svg rect,
+.table-layout-sodoghe .seat-item.unavailable svg rect,
+.table-seat-template .row-seats .seat-item.unavailable svg rect {
+  fill: #e0e0e0;
+  stroke: #f2f2f2;
+}
+.seat-type-groups .seat-type-info.unavailable svg path.icon-disabled,
+.table-layout-sodoghe .seat-item.unavailable svg path.icon-disabled,
+.table-seat-template .row-seats .seat-item.unavailable svg path.icon-disabled {
+  fill: #f2f2f2;
+  stroke: #f2f2f2;
+}
+.seat-type-groups .seat-type-info.selected svg rect,
+.table-layout-sodoghe .seat-item.selected svg rect,
+.table-seat-template .row-seats .seat-item.selected svg rect {
+  stroke: #27ae60;
+  fill: #8be5b0;
+}
+.seat-type-groups .seat-type-info.selected svg path.icon-selected,
+.table-layout-sodoghe .seat-item.selected svg path.icon-selected,
+.table-seat-template .row-seats .seat-item.selected svg path.icon-selected {
+  fill: #27ae60;
+}
+.nl-coach .table-layout-sodoghe tbody tr td .seat-item,
+.table-seat-template .row-seats .seat-item {
+  height: 41px;
+  cursor: pointer;
+}
+.nl-coach .table-layout-sodoghe tbody tr td .seat-item.unavailable,
+.table-seat-template .row-seats .seat-item.unavailable {
+  cursor: not-allowed;
+}
+
+.seat-type-info.unavailable svg rect,
+.table-layout-sodoghe .seat-item.unavailable svg rect,
+.table-seat-template .row-seats .seat-item.unavailable svg rect {
+  fill: #e0e0e0;
+  stroke: #f2f2f2;
+}
+.seat-type-info.unavailable svg path.icon-disabled,
+.table-layout-sodoghe .seat-item.unavailable svg path.icon-disabled,
+.table-seat-template .row-seats .seat-item.unavailable svg path.icon-disabled {
+  fill: #f2f2f2;
+  stroke: #f2f2f2;
+}
+.seat-type-info.selected svg rect,
+.table-layout-sodoghe .seat-item.selected svg rect,
+.table-seat-template .row-seats .seat-item.selected svg rect {
+  stroke: #27ae60;
+  fill: #8be5b0;
+}
+.seat-type-info.selected svg path.icon-selected,
+.table-layout-sodoghe .seat-item.selected svg path.icon-selected,
+.table-seat-template .row-seats .seat-item.selected svg path.icon-selected {
+  fill: #27ae60;
+}
+.nl-coach .table-layout-sodoghe tbody tr td .seat-item,
+.table-seat-template .row-seats .seat-item {
+  height: 41px;
+  cursor: pointer;
+}
+.nl-coach .table-layout-sodoghe tbody tr td .seat-item.unavailable,
+.table-seat-template .row-seats .seat-item.unavailable {
+  cursor: not-allowed;
+}
