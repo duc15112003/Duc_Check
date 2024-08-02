@@ -53,8 +53,9 @@ function Trip() {
             },
          });
          if(response.data.result.content.length ===0){
-            console.log(0)
-             window.alert("Không tìm thấy chuyến theo ngày đã chọn")
+             showPopup('!Không tìm thấy chuyến theo ngày đã chọn', 'error');
+             setTrips([]);
+             setTotalPages(0);
          }else{
              console.log(response.data.result.content)
              setTrips(response.data.result.content);
@@ -97,6 +98,13 @@ function Trip() {
       return matchesStatus;
    });
 
+    const reset = (currentPage, itemsPerPage) => {
+        setSearchDate(""); // Reset search date
+        setError(""); // Reset any error message
+        showPopup('Làm mới thành công !', 'success');
+        fetchTrips(currentPage, itemsPerPage)
+    }
+
    return (
        <div className="my-4">
           <div className="flex items-center justify-between p-2">
@@ -116,7 +124,7 @@ function Trip() {
                 </button>
                 <button
                     className="px-4 py-2 mx-2 w-auto  bg-blue-500  text-center text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-                    onClick={() => fetchTrips}>Làm mới
+                    onClick={() => reset()}>Làm mới
                 </button>
              </form>
              <div className="">
