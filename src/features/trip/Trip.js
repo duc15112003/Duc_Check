@@ -17,30 +17,33 @@ function Trip() {
    const dispatch = useDispatch();
    const [openModal, setOpenModal] = useState(false);
    const { isOpen, message, type, showPopup, closePopup } = usePopup();
-
+    const [currentPage, setCurrentPage] = useState(0); // API expects page to start from 0
+    const [totalPages, setTotalPages] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
    useEffect(() => {
       dispatch(setPageTitle({ title: "Danh sách chuyến tàu" }));
 
-      fetchTrips();
+       fetchTrips(currentPage, itemsPerPage);
 
-   }, []);
+   }, [currentPage, itemsPerPage]);
 
-   const fetchTrips = async () => {
-      try {
-         const response = await axios.get(`http://localhost:8080/api/saigonwaterbus/admin/trips`, {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         });
-         if (response.data.result.content.length === 0) {
-            setTrips([]);
-         } else {
-            setTrips(response.data.result.content);
-         }
-      } catch (error) {
-
-      }
-   };
+    const fetchTrips = async (page = 0, size = 10) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/saigonwaterbus/admin/trips?page=${page}&size=${size}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (response.data.result.content.length === 0) {
+                setTrips([]);
+            } else {
+                setTrips(response.data.result.content);
+                setTotalPages(response.data.result.totalPages); // Assuming your backend sends the total pages
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
    const SearchTrip = async (date) => {
       try {
@@ -49,10 +52,12 @@ function Trip() {
                Authorization: `Bearer ${token}`,
             },
          });
-         if (response.data.result.content.length === 0) {
-            setTrips([]);
-         } else {
-            setTrips(response.data.result.content);
+         if(response.data.result.content.length ===0){
+            console.log(0)
+             window.alert("Không tìm thấy chuyến theo ngày đã chọn")
+         }else{
+             console.log(response.data.result.content)
+             setTrips(response.data.result.content);
          }
       } catch (error) {
       }
@@ -79,12 +84,9 @@ function Trip() {
       const currentDate = new Date(getCurrentDate());
       const selectedDate = new Date(searchDate);
 
-      if (selectedDate < currentDate) {
-         setError("Ngày tìm kiếm không được nhỏ hơn ngày hiện tại.");
-      } else {
          setError("");
          SearchTrip(searchDate);
-      }
+
    };
    const [searchStatus, setSearchStatus] = useState('');
    const handleSearchStatusChange = (e) => {
@@ -105,7 +107,7 @@ function Trip() {
                     id="searchDate"
                     value={searchDate}
                     onChange={(e) => setSearchDate(e.target.value)}
-                    min={getCurrentDate()}
+
                     className="px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                 />
 
@@ -144,8 +146,8 @@ function Trip() {
 <div className="flex mt-4 justify-center">
                 <div className="pagination-buttons space-x-5">
                     <button
-                        // onClick={() => handlePageChange(0)}
-                        // disabled={page === 0}
+                        onClick={() => setCurrentPage(0)}
+                        disabled={currentPage === 0}
                         className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none"
                     >
                         <svg
@@ -162,8 +164,8 @@ function Trip() {
                         </svg>
                     </button>
                     <button
-                        // onClick={() => handlePageChange(page - 1)}
-                        // disabled={page === 0}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 0}
                         className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none"
                     >
                         <svg
@@ -182,11 +184,11 @@ function Trip() {
                         </svg>
                     </button>
                     <span className="px-3 py-2">
-                        {/* {page + 1} / {totalPages} */}
+                          {currentPage + 1} / {totalPages}
                     </span>
                     <button
-                        // onClick={() => handlePageChange(page + 1)}
-                        // disabled={page === totalPages - 1}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage + 1 >= totalPages}
                         className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none"
                     >
                         <svg
@@ -204,8 +206,8 @@ function Trip() {
                         </svg>
                     </button>
                     <button
-                        // onClick={() => handlePageChange(totalPages - 1)}
-                        // disabled={page === totalPages - 1}
+                        onClick={() => setCurrentPage(totalPages - 1)}
+                        disabled={currentPage + 1 >= totalPages}
                         className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none"
                     >
                         <svg

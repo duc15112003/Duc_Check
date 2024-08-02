@@ -128,12 +128,12 @@ function TripList({ trip ,fetchTrips,showPopup}) {
 
     const getStations = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/saigonwaterbus/admin/station", {
+            const response = await axios.get("http://localhost:8080/api/saigonwaterbus/admin/stations", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setStations(response.data.result);
+            setStations(response.data.result.content);
         } catch (error) {
             console.error("Error fetching stations:", error);
         }
