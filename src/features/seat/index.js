@@ -225,49 +225,55 @@ const handleConfirm = async () => {
         </table>
         <div className="mt-4 flex justify-center">
           <button
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+              className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
               onClick={() => handlePageChange(0)}
               disabled={currentPage === 0}
           >
-            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" height="1em" width="1em">
-              <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" />
+            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                 viewBox="0 0 24 24" height="1em" width="1em">
+              <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
             </svg>
           </button>
           <button
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+              className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 0}
           >
-            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" height="1em" width="1em">
-              <path d="M15 18l-6-6 6-6" />
+            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                 viewBox="0 0 24 24" height="1em" width="1em">
+              <path d="M15 18l-6-6 6-6"/>
             </svg>
           </button>
+          <span className="flex items-center px-4 py-2 border rounded-lg bg-white">
+            {currentPage + 1} / {totalPages}
+          </span>
           <button
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+              className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages - 1}
           >
-            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" height="1em" width="1em">
-              <path d="M9 18l6-6-6-6" />
+            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                 viewBox="0 0 24 24" height="1em" width="1em">
+              <path d="M9 18l6-6-6-6"/>
             </svg>
           </button>
           <button
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+              className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
               onClick={() => handlePageChange(totalPages - 1)}
               disabled={currentPage === totalPages - 1}
           >
-                        <svg
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                        >
-                            <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
-                        </svg>
+            <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+            >
+              <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
+            </svg>
           </button>
         </div>
       </div>

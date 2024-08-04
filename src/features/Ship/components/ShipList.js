@@ -228,98 +228,6 @@ const filteredShips = ships.filter((ship) => {
     return matchesNumberPlate && matchesStatus;
 });
 
-
-    const paginationItems = [];
-
-// First button
-    paginationItems.push(
-        <button
-            key="first"
-            onClick={() => handlePageChange(0)} // Assuming page index starts from 0
-            disabled={currentPage === 0} // Disable if already on the first page
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
-        >
-                       <svg
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                        >
-                            <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
-                        </svg>
-        </button>
-    );
- 
-    paginationItems.push(
-        <button
-            key="previous"
-            onClick={() => handlePageChange(currentPage - 1)} // Go to previous page
-            disabled={currentPage === 0} // Disable if already on the first page
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
-        >
-                        <svg
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                        >
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-        </button>
-    );
-// Next button
-    paginationItems.push(
-        <button
-            key="next"
-            onClick={() => handlePageChange(currentPage + 1)} // Go to next page
-            disabled={currentPage === totalPages - 1} // Disable if already on the last page
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
-        >
-            <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                height="1em"
-                width="1em"
-            >
-                <path d="M9 18l6-6-6-6" />
-            </svg>
-        </button>
-    );
-
-// Last button
-    paginationItems.push(
-        <button
-            key="last"
-            onClick={() => handlePageChange(totalPages - 1)} // Go to last page
-            disabled={currentPage === totalPages - 1} // Disable if already on the last page
-                        className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
-        >
-                        <svg
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                        >
-                            <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
-                        </svg>
-        </button>
-    );
     return (
         <div className="container mx-auto p-4">
                     <PopupDone isOpen={isOpen} message={message} type={type} onClose={closePopup} />
@@ -392,12 +300,93 @@ const filteredShips = ships.filter((ship) => {
             </div>
 
             <div className="flex justify-center mt-4">
-                {paginationItems}
+
+                <button
+                    key="first"
+                    onClick={() => handlePageChange(0)} // Assuming page index starts from 0
+                    disabled={currentPage === 0} // Disable if already on the first page
+                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
+                    </svg>
+                </button>
+
+                <button
+                    key="previous"
+                    onClick={() => handlePageChange(currentPage - 1)} // Go to previous page
+                    disabled={currentPage === 0} // Disable if already on the first page
+                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                    <span className="flex items-center px-4 py-2 border rounded-lg bg-white">
+                    {currentPage + 1} / {totalPages}
+                  </span>
+                <button
+                    key="next"
+                    onClick={() => handlePageChange(currentPage + 1)} // Go to next page
+                    disabled={currentPage === totalPages - 1} // Disable if already on the last page
+                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+                <button
+                    key="last"
+                    onClick={() => handlePageChange(totalPages - 1)} // Go to last page
+                    disabled={currentPage === totalPages - 1} // Disable if already on the last page
+                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
+                    </svg>
+                </button>
+
             </div>
 
             {isViewModalOpen && (
                 <div className="fixed inset-0 z-10 overflow-y-auto">
-                    <div
+                <div
                         className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                         <div className="fixed inset-0 transition-opacity">
                             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
