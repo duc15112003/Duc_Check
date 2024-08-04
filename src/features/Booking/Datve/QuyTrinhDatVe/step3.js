@@ -37,7 +37,129 @@ const Step3 = ({ prevStep, clickedSeats, chuyenTau, setUserInfor, userInfor,setO
     }
   }, [userDetails, setUserInfor]);
 
-  const seatNamesString = clickedSeats.map(seat => seat.seatName).join(', ');
+    const handlePrint = () => {
+        const printContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Print</title>
+            <style>
+              @media print {
+                body, html {
+                  margin: 0;
+                  padding: 0;
+                  width: 80mm;
+                  height: auto;
+                  font-family: Arial, sans-serif;
+                  background-color: #fff;
+                }
+                .container {
+                  width: 100%;
+                  padding: 10px;
+                  box-sizing: border-box;
+                }
+                h1 {
+                  font-size: 24px;
+                  color: #4CAF50;
+                  text-align: center;
+                  border-bottom: 2px solid #4CAF50;
+                  padding-bottom: 10px;
+                  margin: 0;
+                }
+                .ticket-info {
+                  padding: 10px;
+                }
+                .ticket-info label {
+                  font-weight: bold;
+                  display: block;
+                  margin: 5px 0;
+                  font-size: 14px;
+                }
+                .ticket-info span {
+                  margin-left: 10px;
+                  font-weight: normal;
+                  color: #555;
+                  font-size: 14px;
+                }
+                .total {
+                  font-size: 16px;
+                  color: #e74c3c;
+                  font-weight: bold;
+                  text-align: right;
+                  margin-top: 10px;
+                }
+              }
+               body, html {
+                  margin: 0;
+                  padding: 0;
+                  width: 80mm;
+                  height: auto;
+                  font-family: Arial, sans-serif;
+                  background-color: #fff;
+                }
+                .container {
+                  width: 100%;
+                  padding: 10px;
+                  box-sizing: border-box;
+                }
+                h1 {
+                  font-size: 24px;
+                  color: #4CAF50;
+                  text-align: center;
+                  border-bottom: 2px solid #4CAF50;
+                  padding-bottom: 10px;
+                  margin: 0;
+                }
+                .ticket-info {
+                  padding: 10px;
+                }
+                .ticket-info label {
+                  font-weight: bold;
+                  display: block;
+                  margin: 5px 0;
+                  font-size: 14px;
+                }
+                .ticket-info span {
+                  margin-left: 10px;
+                  font-weight: normal;
+                  color: #555;
+                  font-size: 14px;
+                }
+                .total {
+                  font-size: 16px;
+                  color: #e74c3c;
+                  font-weight: bold;
+                  text-align: right;
+                  margin-top: 10px;
+                }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Thông tin vé</h1>
+              <div class="ticket-info">
+                <label>Họ tên: <span>${userDetails.name}</span></label>
+                <label>Email: <span>${userDetails.email}</span></label>
+                <label>Số điện thoại: <span>${userDetails.phone}</span></label>
+                <label>Phương thức thanh toán: <span>${userDetails.payment}</span></label>
+                <label>Chuyến tàu: <span>${chuyenTau.fromTerminal} - ${chuyenTau.toTerminal}</span></label>
+                <label>Thời gian khởi hành: <span>${chuyenTau.departureTime} ${formatDate(chuyenTau.departureDate)}</span></label>
+                <label>Số ghế: <span>${seatNamesString}</span></label>
+                <div class="total">Tổng tiền: <span>${formatCurrencyVND(clickedSeats.length * 15000)}</span></div>
+              </div>
+            </div>
+          </body>
+        </html>
+    `;
+
+        const printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        printWindow.print();
+    };
+
+
+    const seatNamesString = clickedSeats.map(seat => seat.seatName).join(', ');
   const { isOpen, message, type, showPopup, closePopup } = usePopup();
   const handleBookingTicket =async (e) => {
     e.preventDefault()
@@ -160,6 +282,7 @@ const Step3 = ({ prevStep, clickedSeats, chuyenTau, setUserInfor, userInfor,setO
         
         <button
           className="text-sm bg-blue-400 hover:bg-blue-600 text-white flex-grow font-bold py-2 rounded flex items-center justify-center focus:outline-none focus:ring-blue-500 focus:ring-2"
+          onClick={handlePrint}
         >
           <img src='/icon/print.png' alt='' className="w-6 h-6 mr-2" />
           In vé

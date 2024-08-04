@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RouteForm = ({ stations, handleSaveRoute, setOpenAddForm }) => {
     const [formDataAddRoute, setFormDataAddRoute] = useState({
@@ -15,6 +15,19 @@ const RouteForm = ({ stations, handleSaveRoute, setOpenAddForm }) => {
         updateAt: '',
         deleteAt: ''
     });
+
+    const [reversedWaypoints, setReversedWaypoints] = useState(false);
+
+    useEffect(() => {
+        if (formDataAddRoute.fromTerminal.id) {
+            const selectedStation = stations.find(station => station.id === parseInt(formDataAddRoute.fromTerminal.id));
+            const linhDongIndex = stations.findIndex(station => station.name === 'Linh Đông');
+            const selectedIndex = stations.findIndex(station => station.id === parseInt(formDataAddRoute.fromTerminal.id));
+
+            // Reverse if the selected station is Linh Đông or any station after Linh Đông
+            setReversedWaypoints(selectedIndex >= linhDongIndex);
+        }
+    }, [formDataAddRoute.fromTerminal.id, stations]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -108,7 +121,7 @@ const RouteForm = ({ stations, handleSaveRoute, setOpenAddForm }) => {
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Bến dừng:</label>
                     <label className="block text-gray-700 text-sm font-bold mb-2">* Các bến dừng đang được hiển thị theo chiều đi từ Bạch Đằng đến Linh Đông</label>
-                    {stations.map((station, index) => (
+                    {(reversedWaypoints ? [...stations].reverse() : stations).map((station, index) => (
                         (index !== 0 && index !== stations.length - 1) ? (
                             <div key={station.id} className="flex items-center mb-2">
                                 <input

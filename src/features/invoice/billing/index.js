@@ -13,12 +13,17 @@ const InvoiceTable = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const dispatch = useDispatch();
-
     useEffect(() => {
-        dispatch(setPageTitle({ title: 'Hóa đơn' }));
-        fetchInvoices(new Date().toISOString().split('T')[0]);
-    }, [dispatch]);
+        const interval = setInterval(() => {
+            dispatch(setPageTitle({ title: 'Hóa đơn' }));
+            console.log(new Date().toISOString().split('T')[0]);
+            const date = new Date().toISOString().split('T')[0];
+            fetchInvoices(date, 0);
+        }, 1000); // 1000 milliseconds = 5 minutes
 
+        // Dọn dẹp interval khi component bị unmount
+        return () => clearInterval(interval);
+    }, [dispatch]);
     const token = localStorage.getItem('token');
 
     const fetchInvoices = async (date, page) => {
@@ -63,6 +68,7 @@ const InvoiceTable = () => {
     };
 
     const handleChangeDate = (event) => {
+        console.log(event.target.value)
         setSearchDate(event.target.value);
     };
 

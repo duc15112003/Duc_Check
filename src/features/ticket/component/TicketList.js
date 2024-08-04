@@ -88,88 +88,90 @@ const TicketList = ({ tickets, date, setDate, page, setPage, size, totalPages, f
                 ))}
                 </tbody>
             </table>
-<div className="mt-4 flex justify-center">
-    <button
-        onClick={() => setPage(0)}
-        className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded`}
-        disabled={page === 0}
-    >
-        <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-        >
-            <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" />
-        </svg>
-    </button>
+            <div className="mt-4 flex justify-center">
+                <button
+                    onClick={() => setPage(0)}
+                    className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded`}
+                    disabled={page === 0}
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
+                    </svg>
+                </button>
 
-    <button
-        onClick={() => setPage(page - 1)}
-        className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
-        disabled={page === 0}
-    >
-        <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-        >
-            <path d="M15 18l-6-6 6-6" />
-        </svg>
-    </button>
+                <button
+                    onClick={() => setPage(page - 1)}
+                    className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
+                    disabled={page === 0}
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <span className="px-3 py-2">
+                          {page+1} / {totalPages}
+                </span>
+                <button
+                    onClick={() => setPage(page + 1)}
+                    className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
+                    disabled={page + 1 >= totalPages}
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
 
-    <button
-        onClick={() => setPage(page + 1)}
-        className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
-        disabled={page + 1 >= totalPages}
-    >
-        <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-        >
-            <path d="M9 18l6-6-6-6" />
-        </svg>
-    </button>
-
-    <button
-        onClick={() => setPage(totalPages - 1)}
-        className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
-        disabled={page === totalPages - 1}
-    >
-        <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-        >
-            <path d="M13 17l5-5-5-5M6 17l5-5-5-5" />
-        </svg>
-    </button>
-</div>
+                <button
+                    onClick={() => setPage(totalPages - 1)}
+                    className={`px-4 py-2 mx-1 bg-sky-500 text-white rounded `}
+                    disabled={page === totalPages - 1}
+                >
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                    >
+                        <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
+                    </svg>
+                </button>
+            </div>
 
 
             {/* Popup for displaying ticket details */}
             {isPopupOpen && selectedTicket && (
-<div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+                <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
     <div className="bg-white p-8 rounded-lg shadow-2xl max-w-lg w-full">
         <h2 className="text-2xl font-semibold mb-4 border-b pb-2 text-center">Chi Tiết Vé</h2>
         <div className="space-y-2">
