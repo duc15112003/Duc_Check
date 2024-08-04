@@ -340,7 +340,7 @@ const filteredShips = ships.filter((ship) => {
                         <path d="M15 18l-6-6 6-6"/>
                     </svg>
                 </button>
-                    <span className="flex items-center px-4 py-2 border rounded-lg bg-white">
+                    <span className="flex items-center px-4 py-2">
                     {currentPage + 1} / {totalPages}
                   </span>
                 <button

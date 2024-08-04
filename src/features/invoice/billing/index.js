@@ -128,42 +128,88 @@ const InvoiceTable = () => {
                                 </tbody>
                             </table>
                             <div className="flex justify-center mt-4">
-                                {totalPages > 1 && (
-                                    <div className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                                         aria-label="Pagination">
-                                        <button
-                                            onClick={() => handlePageChange(1)}
-                                            className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600"
-                                        >
-                                            <span className="sr-only">First</span>
-                                            <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </button>
-                                        <button
-                                            onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)}
-                                            className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600"
-                                        >
-                                            <ChevronLeftIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </button>
-                                        <span className="flex items-center px-4 py-2 border rounded-lg bg-white">
-                                          {currentPage} / {totalPages}
-                                        </span>
-                                        <button
-                                            onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)}
-                                            className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600"
-                                        >
-                                            <span className="sr-only">Next</span>
-                                            <ChevronRightIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </button>
-                                        <button
-                                            onClick={() => handlePageChange(totalPages)}
-                                            className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600"
-                                        >
-                                            <span className="sr-only">Last</span>
-                                            <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
+                                <button
+                                    key="first"
+                                    onClick={() => handlePageChange(0)} // Assuming page index starts from 0
+                                    disabled={currentPage === 0} // Disable if already on the first page
+                                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                                >
+                                    <svg
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                    >
+                                        <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
+                                    </svg>
+                                </button>
+
+                                <button
+                                    key="previous"
+                                    onClick={() => handlePageChange(currentPage - 1)} // Go to previous page
+                                    disabled={currentPage === 0} // Disable if already on the first page
+                                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                                >
+                                    <svg
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                    >
+                                        <path d="M15 18l-6-6 6-6"/>
+                                    </svg>
+                                </button>
+                                    <span className="flex items-center px-4 py-2">
+                                    {currentPage} / {totalPages}
+                                </span>
+                                <button
+                                    key="next"
+                                    onClick={() => handlePageChange(currentPage + 1)} // Go to next page
+                                    disabled={currentPage === totalPages - 1} // Disable if already on the last page
+                                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                                >
+                                    <svg
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                    >
+                                        <path d="M9 18l6-6-6-6"/>
+                                    </svg>
+                                </button>
+                                <button
+                                    key="last"
+                                    onClick={() => handlePageChange(totalPages - 1)} // Go to last page
+                                    disabled={currentPage === totalPages - 1} // Disable if already on the last page
+                                    className="px-3 py-2 bg-sky-500 text-gray-700 rounded-md shadow-md hover:bg-gray-300 focus:outline-none mx-2"
+                                >
+                                    <svg
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                    >
+                                        <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
+                                    </svg>
+                                </button>
+
+                                </div>
                         </>
                     )}
                 </div>
