@@ -12,7 +12,7 @@ const InvoiceTable = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [size, setsize] = useState(10);
+    const [size, setsize] = useState(1);
     const dispatch = useDispatch();
 
     useEffect(() => {

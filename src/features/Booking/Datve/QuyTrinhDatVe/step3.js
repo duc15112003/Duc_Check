@@ -38,6 +38,9 @@ const Step3 = ({ prevStep, clickedSeats, chuyenTau, setUserInfor, userInfor,setO
   }, [userDetails, setUserInfor]);
 
     const handlePrint = () => {
+  if (!userDetails.payment || userDetails.payment === '') {
+    return;
+  }
         const printContent = `
         <!DOCTYPE html>
         <html>
@@ -166,7 +169,9 @@ const Step3 = ({ prevStep, clickedSeats, chuyenTau, setUserInfor, userInfor,setO
     setIsLoading(true)
     userDetails.trip=chuyenTau.id;
     userDetails.seat=clickedSeats;
-    console.log(userDetails);
+      if (!userDetails.payment) {
+    userDetails.payment = 'BANK_TRANSFER';
+  }
     let response='';
         try {
           response=  await axios.post(`http://localhost:8080/api/saigonwaterbus/admin/sell-ticket`, userDetails, {
@@ -248,6 +253,8 @@ const Step3 = ({ prevStep, clickedSeats, chuyenTau, setUserInfor, userInfor,setO
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:ring-2"
           required
         >
+                  <option value="" selected>Chọn </option>
+
           <option value="BANK_TRANSFER">Chuyển khoản</option>
           <option value="CASH">Tiền mặt </option>
         </select>
